@@ -109,7 +109,7 @@ const RegisterAuth = (props) => {
       <div className="auth__main">
         <div className="main__auth">
           <form className='form__auth'>
-            <h3>Регистрация</h3>
+            <h3>Register</h3>
             <div className='input-form'>
               <label>
                 Email:
@@ -207,7 +207,7 @@ const RegisterAuth = (props) => {
                       && password === repPassword)
                   }
                 >
-                  Зарегистрироваться
+                  Register
                 </Button>
               </ThemeProvider>
             </Box>
@@ -225,7 +225,7 @@ const RegisterAuth = (props) => {
                   }}
                   variant="text"
                 >
-                  Авторизоваться
+                  Login
                 </Button>
               </ThemeProvider>
             </Box>
@@ -236,7 +236,7 @@ const RegisterAuth = (props) => {
             onClose={handleClose}
           >
             <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
-              Такой пользователь уже существует
+              Such user already exists
             </Alert>
           </Snackbar>
         </div>
