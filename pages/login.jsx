@@ -142,9 +142,9 @@ const LoginAuth = (props) => {
                     name="password"
                     placeholder='Password'
                     className={
-                      password && errorPass
-                        ? 'errorInput'
-                        : ''
+                      password && errorPass 
+                      ? 'errorInput' 
+                      : ''
                     }
                     value={password}
                     onChange={(e) =>
