@@ -115,7 +115,9 @@ const LoginAuth = (props) => {
                     placeholder='Login'
                     value={username}
                     className={
-                      username.length && errorLogin && 'errorInput'
+                      username.length && errorLogin
+                        ? 'errorInput'
+                        : ''
                     }
                     onChange={(e) =>
                       changeDataAuth(e.target.name, e.target.value)
@@ -140,7 +142,9 @@ const LoginAuth = (props) => {
                     name="password"
                     placeholder='Password'
                     className={
-                      password && errorPass && 'errorInput'
+                      password && errorPass
+                        ? 'errorInput'
+                        : ''
                     }
                     value={password}
                     onChange={(e) =>
