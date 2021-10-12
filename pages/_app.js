@@ -1,7 +1,13 @@
-import '../styles/globals.css'
+import '../styles/App.scss'
+import Head from 'next/head';
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return <>
+    <Head>
+      <meta rel="preload" href="../styles/main.scss" />
+    </Head>
+    <Component {...pageProps} />
+  </>
 }
 
 export default MyApp
