@@ -33,20 +33,8 @@ const LoginAuth = (props) => {
       login: username
     }
     localStorage.setItem('user', JSON.stringify(user));
-
-    // props.thunkLogin(data)
-    //   .then((res) => {
-    //     if (res) {
-    //       localStorage.setItem('token', `Bearer ${res.data.token}`);
-    //       props.setFlag(!props.flag);
-    //       history.push('/main')
-    //     }
-    //   })
-    //   .catch(err => {
-    //     setOpen(true);
-    //   });
   };
-  
+
   const changeDataAuth = (nameInput, value) => {
     switch (nameInput) {
       case 'username': {
@@ -120,7 +108,7 @@ const LoginAuth = (props) => {
             <h3>Войти в систему</h3>
             <div className='input-form'>
               <label>
-                Login:
+                Email:
                 <div>
                   <input type="text"
                     name="username"
@@ -134,11 +122,11 @@ const LoginAuth = (props) => {
                     }
                   />
                   {
-                    username.length && errorLogin
-                      ? <span className='error'>
-                        Login is less then 6
-                      </span>
-                      : null
+                    username.length
+                    && errorLogin
+                    && <span className='error'>
+                      Login is less then 6
+                    </span>
                   }
                 </div>
               </label>
@@ -161,14 +149,14 @@ const LoginAuth = (props) => {
                     }
                   />
                   {
-                    password && errorPass
-                      ? <span className='error'>
-                        Password is
-                        less than 6 not contain
-                        latin letters not contain
-                        1 number
-                      </span>
-                      : null
+                    password
+                    && errorPass
+                    && <span className='error'>
+                      Password is
+                      less than 6 not contain
+                      latin letters not contain
+                      1 number
+                    </span>
                   }
                 </div>
               </label>
@@ -189,8 +177,8 @@ const LoginAuth = (props) => {
                   variant="outlined"
                   disabled={
                     !(username
-                      && password 
-                      && !errorLogin 
+                      && password
+                      && !errorLogin
                       && !errorPass)
                   }
                   onClick={() => login()}

@@ -4,10 +4,7 @@ import MainContainer from "../../components/MainContainer";
 
 
 export default function ({user}) {
-    console.log(user);
-    // const router = useRouter();
-    // const {id} = router.query;
-    // console.log(id);
+
     return (
         <MainContainer>
             user {user.name}

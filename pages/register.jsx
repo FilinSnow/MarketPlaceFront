@@ -83,20 +83,6 @@ const RegisterAuth = (props) => {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
 
-  const register = () => {
-    // props.thunkRegister(data)
-    //   .then(res => {
-    //     if (res) {
-    //       localStorage.setItem('token', `Bearer ${res.data.token}`);
-    //       props.setFlag(!props.flag);
-    //       history.push('/main')
-    //     }
-    //   })
-    //   .catch(err => {
-    //     setOpen(true);
-    //   });
-  };
-
   const theme = createTheme({
     palette: {
       primary: {
@@ -128,11 +114,11 @@ const RegisterAuth = (props) => {
               <label>
                 Email:
                 {
-                  username.length && errorLogin
-                    ? <span className='error'>
-                      Email is less then 6
-                    </span>
-                    : null
+                  username.length
+                  && errorLogin
+                  && <span className='error'>
+                    Email is less then 6
+                  </span>
                 }
                 <div>
                   <input type="text"
@@ -153,14 +139,14 @@ const RegisterAuth = (props) => {
               <label>
                 Password:
                 {
-                  password && errorPass
-                    ? <span className='error'>
-                      Password is
-                      less than 6 not contain
-                      latin letters not contain
-                      1 number
-                    </span>
-                    : null
+                  password
+                  && errorPass
+                  && <span className='error'>
+                    Password is
+                    less than 6 not contain
+                    latin letters not contain
+                    1 number
+                  </span>
                 }
                 <div>
                   <input type="password"
@@ -180,12 +166,13 @@ const RegisterAuth = (props) => {
             </div>
             <div className='input-form'>
               <label>
-                Repeat Password: {
-                  repPassword && errorRepPass
-                    ? <span className='error'>
-                      Password different
-                    </span>
-                    : null
+                Repeat Password:
+                {
+                  repPassword
+                  && errorRepPass
+                  && <span className='error'>
+                    Password different
+                  </span>
                 }
                 <div>
                   <input type="password"
@@ -219,7 +206,6 @@ const RegisterAuth = (props) => {
                       && password
                       && password === repPassword)
                   }
-                  onClick={() => register()}
                 >
                   Зарегистрироваться
                 </Button>

@@ -23,7 +23,7 @@ export default function BasicMenu(props) {
     setAnchorEl(null);
     router.push(url);
   };
-  console.log(1);
+
   return (
     <div>
       <Button
