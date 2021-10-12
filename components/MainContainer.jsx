@@ -48,15 +48,17 @@ const MainContainer = ({ children }) => {
                 <a >Home</a>
               </Link>
               <Link href="/shop">
-                <a>Магазин</a>
+                <a>Shop</a>
               </Link>
             </div>
             <div className="account__container nav-container">
               <div className="account__icon-user account">
-                <Image
+                {username && <Image
                   src={imgUser}
                   alt="Picture of the author"
                 />
+                }
+
               </div>
               <div className="account__authorize account">
                 {username
@@ -65,16 +67,13 @@ const MainContainer = ({ children }) => {
 
                 }
               </div>
-              {username
-                ? <div className="account__icon-shop account">
+              {username && <div className="account__icon-shop account">
                   <Image
                     src={imgShop}
                     alt="Picture of the author"
                   />
                 </div>
-                : null
               }
-
             </div>
           </div>
         </div>

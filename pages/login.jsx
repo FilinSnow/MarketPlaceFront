@@ -105,7 +105,7 @@ const LoginAuth = (props) => {
       <div className="auth__main">
         <div className="main__auth">
           <form className='form__auth'>
-            <h3>Войти в систему</h3>
+            <h3>Login in system</h3>
             <div className='input-form'>
               <label>
                 Email:
@@ -127,7 +127,7 @@ const LoginAuth = (props) => {
                     username.length
                     && errorLogin
                     && <span className='error'>
-                      Login is less then 6
+                      Email is less then 6
                     </span>
                   }
                 </div>
@@ -187,7 +187,7 @@ const LoginAuth = (props) => {
                   }
                   onClick={() => login()}
                 >
-                  Войти
+                  Login
                 </Button>
               </ThemeProvider>
             </Box>
@@ -202,7 +202,7 @@ const LoginAuth = (props) => {
                   className='register__btn'
                   variant="text"
                 >
-                  Зарегистрироваться
+                  Register
                 </Button>
               </ThemeProvider>
             </Box>
@@ -213,7 +213,7 @@ const LoginAuth = (props) => {
             onClose={handleClose}
           >
             <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
-              Логин или пароль введён неверно
+              Email or password wrong
             </Alert>
           </Snackbar>
         </div>
