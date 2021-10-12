@@ -18,12 +18,12 @@ const MainContainer = ({ children }) => {
   const username = login?.split('@')[0];
   const listmenu = username
     ? [
-      { url: '/orders', name: 'My orders' },
-      { url: '/exit', name: 'Log Out' }
+      { id: 0, url: '/orders', name: 'My orders' },
+      { id: 1, url: '/exit', name: 'Log Out' }
     ]
     : [
-      { url: '/login', name: 'Log In' },
-      { url: '/register', name: 'Register' },
+      { id: 0, url: '/login', name: 'Log In' },
+      { id: 1, url: '/register', name: 'Register' },
     ]
   return (
     <>

@@ -47,6 +47,7 @@ export default function BasicMenu(props) {
         {listmenu.map(elem => {
           return (
             <MenuItem
+              key={elem.id}
               data-name={elem.url}
               onClick={(e) => handleClose(e.target.dataset.name)}
             >
