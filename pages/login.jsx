@@ -126,9 +126,10 @@ const LoginAuth = (props) => {
                   {
                     username.length
                     && errorLogin
-                    && <span className='error'>
+                    ? <span className='error'>
                       Email is less then 6
                     </span>
+                    : null
                   }
                 </div>
               </label>

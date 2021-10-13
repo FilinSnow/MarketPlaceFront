@@ -4,9 +4,17 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { useRouter } from 'next/dist/client/router';
+import { makeStyles } from '@mui/styles';
 
-export default function BasicMenu(props) {
-  const { title, listmenu } = props
+const useStyles = makeStyles({
+  root: {
+    color: 'black',
+  },
+});
+
+const BasicMenu = (props) => {
+  const classes = useStyles();
+  const { title, listmenu } = props;
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -32,6 +40,7 @@ export default function BasicMenu(props) {
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
+        className={classes.root}
       >
         {title}
       </Button>
@@ -59,3 +68,5 @@ export default function BasicMenu(props) {
     </div>
   );
 }
+
+export default BasicMenu;

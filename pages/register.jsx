@@ -116,9 +116,10 @@ const RegisterAuth = (props) => {
                 {
                   username.length
                   && errorLogin
-                  && <span className='error'>
+                  ? <span className='error'>
                     Email is less then 6
                   </span>
+                  : null
                 }
                 <div>
                   <input type="text"
@@ -141,12 +142,13 @@ const RegisterAuth = (props) => {
                 {
                   password
                   && errorPass
-                  && <span className='error'>
+                  ? <span className='error'>
                     Password is
                     less than 6 not contain
                     latin letters not contain
                     1 number
                   </span>
+                  : null
                 }
                 <div>
                   <input type="password"
