@@ -5,6 +5,7 @@ import Image from 'next/image'
 import imgShop from '../public/img/shop-icon.jpg';
 import imgUser from '../public/img/user-icon.jpg';
 import BasicMenu from './BasicMenu';
+import TemporaryDrawer from './TemporaryDrawer';
 
 const MainContainer = ({ children }) => {
 
@@ -15,6 +16,7 @@ const MainContainer = ({ children }) => {
     const obj = JSON.parse(localStorage.getItem('user'))
     setUser(obj || '');
   }, []);
+
   const username = login?.split('@')[0];
   const listmenu = username
     ? [
@@ -25,6 +27,7 @@ const MainContainer = ({ children }) => {
       { id: 0, url: '/login', name: 'Log In' },
       { id: 1, url: '/register', name: 'Register' },
     ]
+    
   return (
     <>
       <Head>
@@ -47,9 +50,7 @@ const MainContainer = ({ children }) => {
               <Link href="/">
                 <a >Home</a>
               </Link>
-              <Link href="/shop">
-                <a>Shop</a>
-              </Link>
+              <TemporaryDrawer />
             </div>
             <div className="account__container nav-container">
               <div className="account__icon-user account">
