@@ -50,11 +50,13 @@ export default function TemporaryDrawer() {
     >
       <List>
         {categories.map(category => (
-          <ListItem button key={category.id}>
-            <Link href={`/shop/${category.url}`}>
+          
+            <Link key={category.id} href={`/shop/${category.url}`}>
+              <ListItem button >
               <a>{category.text}</a>
+              </ListItem>
             </Link>
-          </ListItem>
+          
         ))}
       </List>
       
