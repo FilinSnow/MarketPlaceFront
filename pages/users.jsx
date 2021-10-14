@@ -10,13 +10,14 @@ const Users = ({ users }) => {
       {users.map(user => {
         return (
           <div key={user.id}>
-            <Link href={`/users/${user.id}`}>{user.name}</Link>
+            <Link href={`/users/${user.id}`} as={`/users/${user.id}`}>{user.name}</Link>
           </div>
         )
       })}
     </MainContainer >
   )
 }
+
 
 export default Users;
 

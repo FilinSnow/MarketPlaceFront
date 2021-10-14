@@ -74,3 +74,39 @@
     height: 22px;
   }
 }
+
+.description__title {
+  text-align: center;
+  margin-bottom: 26px;
+
+  h1 {
+    font-size: 72px;
+    line-height: 1.25em;
+    text-transform: uppercase;
+  }
+}
+
+.description__subtitle {
+  text-align: center;
+  margin-bottom: 55px;
+
+  h3 {
+    font-size: 20px;
+    font-weight: normal;
+  }
+}
+
+.shop-mini {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-gap: 1em;
+  margin-bottom: 30px;
+}
+
+.shop-mini__title {
+  margin-bottom: 20px;
+
+  h3 {
+    font-weight: normal;
+  }
+}
