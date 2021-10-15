@@ -110,3 +110,12 @@
     font-weight: normal;
   }
 }
+
+.container__filter-sort {
+  margin-bottom: 25px;
+
+  .filter-sort {
+    display: flex;
+    justify-content: end;
+  }
+}

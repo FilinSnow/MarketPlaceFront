@@ -13,17 +13,17 @@ const useStyles = makeStyles({
     backgroundColor: 'black',
     verticalAlign: 'baseline',
     '&:hover': {
-      background: 'none',
+      background: 'black',
     },
   },
 });
 
-export default function ImgMediaCard({ img, title, description }) {
+export default function ImgMediaCard({ img, title, description, price, brand }) {
   const classes = useStyles();
 
   return (
     <Card sx={{ maxWidth: 345, margin: '0 10px' }}>
-      <CardContent sx={{'text-align':'center'}}>
+      <CardContent sx={{ 'text-align': 'center' }}>
         <Image src={img} width={200} height={200} />
       </CardContent>
       <CardContent>
@@ -33,6 +33,12 @@ export default function ImgMediaCard({ img, title, description }) {
         <Typography variant="body2" color="text.secondary">
           {description}
         </Typography>
+        {price && <Typography variant="body2" color="text.secondary">
+          Price: {price}
+        </Typography>}
+        {brand && <Typography variant="body2" color="text.secondary">
+          Brand: {brand}
+        </Typography>}
       </CardContent>
       <CardActions>
         {/* <Button size="small">Share</Button> */}

@@ -22,9 +22,9 @@ const useStyles = makeStyles({
 });
 
 const categories = [
-  {id: 0, text: 'Shirt', url: 'shirt'},
-  {id: 1, text: 'Shoes', url: 'shoes'},
-  {id: 2, text: 'Jeans', url: 'jeans'},
+  { id: 0, text: 'Shirt', url: 'shirt' },
+  { id: 1, text: 'Shoes', url: 'shoes' },
+  { id: 2, text: 'Jeans', url: 'jeans' },
 ]
 
 export default function TemporaryDrawer() {
@@ -50,16 +50,16 @@ export default function TemporaryDrawer() {
     >
       <List>
         {categories.map(category => (
-          
-            <Link key={category.id} href={`/shop/${category.url}`}>
-              <ListItem button >
+
+          <Link key={category.id} href={`/shop/${category.url}`}>
+            <ListItem button >
               <a>{category.text}</a>
-              </ListItem>
-            </Link>
-          
+            </ListItem>
+          </Link>
+
         ))}
       </List>
-      
+
     </Box>
   );
 
