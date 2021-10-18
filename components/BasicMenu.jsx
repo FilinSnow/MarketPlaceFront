@@ -22,6 +22,10 @@ const BasicMenu = (props) => {
   };
   const router = useRouter();
   const handleClose = (url) => {
+    if(typeof url !== 'string') {
+      setAnchorEl(null);
+      return;
+    }
     if (url === '/exit') {
       localStorage.removeItem('user');
       props.setUser('');
