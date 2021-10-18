@@ -36,7 +36,6 @@ export default function FilterAndSortData(props) {
     return cards;
   }
   const cardsWithServer = mainCards(category);
-  console.log(cardsWithServer)
   const [sort, setSort] = React.useState('');
   const [filter, setFilter] = React.useState('');
   const [showAscDesc, setShowAscDesc] = React.useState(false);
