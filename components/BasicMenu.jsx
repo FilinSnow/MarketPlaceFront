@@ -32,7 +32,6 @@ const BasicMenu = (props) => {
       setAnchorEl(null);
       return 1;
     }
-    console.log(typeof url);
     setAnchorEl(null);
     router.push(url);
   };

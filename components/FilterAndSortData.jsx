@@ -1,28 +1,62 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
+import { clothes } from '../data/mockData';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { Typography } from '@mui/material';
 import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import { useRouter } from 'next/dist/client/router';
+import { makeStyles } from '@mui/styles';
 
+const useStyles = makeStyles({
+  root: {
+    color: 'white',
+    background: 'black',
+    '&:hover': {
+      background: 'black',
+    },
+  },
+});
 
 export default function FilterAndSortData(props) {
+  const router = useRouter();
+  const classes = useStyles();
+  const { category } = router.query
+  const mainCards = (category) => {
+    let cards;
+    for (const iterator in clothes) {
+      if (iterator === category) {
+        cards = clothes[iterator];
+      }
+    }
+
+    return cards;
+  }
+  const cardsWithServer = mainCards(category);
+  
   const [sort, setSort] = React.useState('');
   const [filter, setFilter] = React.useState('');
   const [showAscDesc, setShowAscDesc] = React.useState(false);
   const [sortAscDesc, setSortAscDesc] = React.useState('');
-  const [showRangePrice, setShowRangePrice] = React.useState(false)
+  const [showRangePrice, setShowRangePrice] = React.useState(false);
+  const [rangePriceInput, setRangePriceInput] = React.useState({
+    from: '',
+    to: ''
+  })
+
+
 
   const handleChangeSort = (event) => {
     switch (event.target.value) {
       case 'None':
         setSort('');
         setShowAscDesc(false);
-        setSortAscDesc('')
+        setSortAscDesc('');
+        props.setCards(cardsWithServer);
         break;
-      // Number(elem1.price.split('$')[0]) - Number(elem2.price.split('$')[0])
       case 'Price':
         let newArr = [];
         setShowAscDesc(true);
@@ -35,16 +69,23 @@ export default function FilterAndSortData(props) {
     }
     setSort(event.target.value);
   };
-  console.log(props);
+
   const handleChangeFilter = (event) => {
     switch (event.target.value) {
       case 'None': {
         setFilter('');
         setShowRangePrice(false);
+        setRangePriceInput({
+          ...rangePriceInput,
+          from: '',
+          to: ''
+        })
+        props.setCards(cardsWithServer);
         break;
       }
       case 'Price ranges': {
         setShowRangePrice(true);
+
         break;
       }
       default: {
@@ -59,7 +100,6 @@ export default function FilterAndSortData(props) {
       case 'None':
         setSortAscDesc('');
         break;
-      // Number(elem1.price.split('$')[0]) - Number(elem2.price.split('$')[0])
       case 'Asc': {
         let newArr = [];
         newArr = props.cards.concat().sort((elem1, elem2) => Number(elem1.price.split('$')[0]) - Number(elem2.price.split('$')[0]));
@@ -78,6 +118,50 @@ export default function FilterAndSortData(props) {
     }
     setSortAscDesc(event.target.value)
   };
+
+  const changePrice = (value, nameInput) => {
+    switch (nameInput) {
+      case 'priceFrom': {
+        setRangePriceInput({
+          ...rangePriceInput,
+          from: value
+        })
+        break;
+      }
+      case 'priceTo': {
+        setRangePriceInput({
+          ...rangePriceInput,
+          to: value
+        })
+        break;
+      }
+      default:
+        break;
+    }
+  }
+  const addFilter = () => {
+    if (rangePriceInput.from > rangePriceInput.to) {
+      setRangePriceInput({
+        ...rangePriceInput,
+        from: rangePriceInput.to,
+        to: rangePriceInput.from
+      })
+
+      // const filterArr = props.cards.filter(elem => Number(elem.price.split('$')[0]) >= rangePriceInput.from && Number(elem.price.split('$')[0]) <= rangePriceInput.to);
+      // props.setCards(filterArr);
+    }
+
+    if (rangePriceInput.from && rangePriceInput.to) {
+      const filterArr = props.cards.filter(elem => Number(elem.price.split('$')[0]) >= rangePriceInput.from && Number(elem.price.split('$')[0]) <= rangePriceInput.to);
+      props.setCards(filterArr);
+    } else if (rangePriceInput.from) {
+      const filterArr = props.cards.filter(elem => Number(elem.price.split('$')[0]) >= rangePriceInput.from);
+      props.setCards(filterArr);
+    } else if (rangePriceInput.to) {
+      const filterArr = props.cards.filter(elem => Number(elem.price.split('$')[0]) <= rangePriceInput.to);
+      props.setCards(filterArr);
+    }
+  }
 
   return (
     <div className='filter-sort'>
@@ -134,11 +218,27 @@ export default function FilterAndSortData(props) {
         && <Box sx={{ display: 'flex' }}>
           <Box sx={{ width: 100 }}>
             <Typography>Price from</Typography>
-            <TextField id="outlined-basic" variant="outlined" />
+            <TextField
+              name='priceFrom'
+              id="outlined-basic"
+              variant="outlined"
+              value={rangePriceInput.from}
+              onChange={(e) => changePrice(e.target.value, e.target.name)}
+            />
           </Box>
-          <Box sx={{ width: 100 }}>
+          <Box sx={{ width: 100, margin: '0 15px' }}>
             <Typography>Price to</Typography>
-            <TextField id="outlined-basic" variant="outlined" />
+            <TextField
+              name='priceTo'
+              id="outlined-basic"
+              variant="outlined"
+              value={rangePriceInput.to}
+              onChange={(e) => changePrice(e.target.value, e.target.name)}
+            />
+          </Box>
+          <Box sx={{ width: 150, alignSelf: 'center' }}>
+            <Typography sx={{ opacity: 0 }}>Price to</Typography>
+            <Button onClick={addFilter} className={classes.root} variant="contained">Add filter</Button>
           </Box>
         </Box>
       }
