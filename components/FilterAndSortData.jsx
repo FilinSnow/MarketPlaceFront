@@ -36,7 +36,7 @@ export default function FilterAndSortData(props) {
     return cards;
   }
   const cardsWithServer = mainCards(category);
-  
+  console.log(cardsWithServer)
   const [sort, setSort] = React.useState('');
   const [filter, setFilter] = React.useState('');
   const [showAscDesc, setShowAscDesc] = React.useState(false);
@@ -46,13 +46,15 @@ export default function FilterAndSortData(props) {
     from: '',
     to: ''
   })
-
-
+  const brands = cardsWithServer.map(elem => elem.brand);
+  const [showBrandsMenu, setShowBrandsMenu] = React.useState(false);
+  const [brandInput, setBrandInput] = React.useState('');
 
   const handleChangeSort = (event) => {
     switch (event.target.value) {
       case 'None':
         setSort('');
+        setFilter('')
         setShowAscDesc(false);
         setSortAscDesc('');
         props.setCards(cardsWithServer);
@@ -75,6 +77,7 @@ export default function FilterAndSortData(props) {
       case 'None': {
         setFilter('');
         setShowRangePrice(false);
+        setShowBrandsMenu(false)
         setRangePriceInput({
           ...rangePriceInput,
           from: '',
@@ -85,7 +88,12 @@ export default function FilterAndSortData(props) {
       }
       case 'Price ranges': {
         setShowRangePrice(true);
-
+        setShowBrandsMenu(false);
+        break;
+      }
+      case 'Brand': {
+        setShowBrandsMenu(true);
+        setShowRangePrice(false);
         break;
       }
       default: {
@@ -146,9 +154,6 @@ export default function FilterAndSortData(props) {
         from: rangePriceInput.to,
         to: rangePriceInput.from
       })
-
-      // const filterArr = props.cards.filter(elem => Number(elem.price.split('$')[0]) >= rangePriceInput.from && Number(elem.price.split('$')[0]) <= rangePriceInput.to);
-      // props.setCards(filterArr);
     }
 
     if (rangePriceInput.from && rangePriceInput.to) {
@@ -161,6 +166,14 @@ export default function FilterAndSortData(props) {
       const filterArr = props.cards.filter(elem => Number(elem.price.split('$')[0]) <= rangePriceInput.to);
       props.setCards(filterArr);
     }
+  }
+  const changeBrandFilter = (nameBrand) => {
+    setBrandInput(nameBrand);
+    if (nameBrand === 'None') {
+     return props.setCards(cardsWithServer);
+    }
+    const filterArr = cardsWithServer.filter(elem => elem.brand === nameBrand);
+    props.setCards(filterArr);
   }
 
   return (
@@ -214,6 +227,24 @@ export default function FilterAndSortData(props) {
           </Select>
         </FormControl>
       </Box>
+      {showBrandsMenu
+        && <Box sx={{ width: 150 }}>
+          <Typography sx={{ opacity: 0 }}>Filter</Typography>
+          <FormControl fullWidth>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={brandInput}
+              onChange={(e) => changeBrandFilter(e.target.value)}
+            >
+              <MenuItem value='None'>None</MenuItem>
+              {
+                brands.map((elem, id) => <MenuItem key={id} value={elem}>{elem}</MenuItem>)
+              }
+            </Select>
+          </FormControl>
+        </Box>
+      }
       {showRangePrice
         && <Box sx={{ display: 'flex' }}>
           <Box sx={{ width: 100 }}>
@@ -237,7 +268,7 @@ export default function FilterAndSortData(props) {
             />
           </Box>
           <Box sx={{ width: 150, alignSelf: 'center' }}>
-            <Typography sx={{ opacity: 0 }}>Price to</Typography>
+            <Typography sx={{ opacity: 0 }}>a</Typography>
             <Button onClick={addFilter} className={classes.root} variant="contained">Add filter</Button>
           </Box>
         </Box>
