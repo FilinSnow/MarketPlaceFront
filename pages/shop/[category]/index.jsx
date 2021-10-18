@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { clothes } from '../../data/mockData';
-import ImgMediaCard from '../../components/ImgMediaCard';
-import MainContainer from '../../components/MainContainer';
+import { clothes } from '../../../data/mockData';
+import ImgMediaCard from '../../../components/ImgMediaCard';
+import MainContainer from '../../../components/MainContainer';
 import { Button } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import FilterAndSortData from '../../components/FilterAndSortData';
+import FilterAndSortData from '../../../components/FilterAndSortData';
 
 const useStyles = makeStyles({
   root: {
@@ -37,6 +37,7 @@ export default function (props) {
           return (
             <ImgMediaCard
               key={elem.id}
+              id={elem.id}
               title={elem.title}
               description={elem.description}
               img={elem.img}

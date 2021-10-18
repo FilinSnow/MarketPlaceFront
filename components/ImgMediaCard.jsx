@@ -6,6 +6,8 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { makeStyles } from '@mui/styles';
 import Image from 'next/image'
+import Link from 'next/link';
+import { useRouter } from 'next/dist/client/router';
 
 const useStyles = makeStyles({
   root: {
@@ -18,8 +20,9 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ImgMediaCard({ img, title, description, price, brand }) {
+export default function ImgMediaCard({ id, img, title, description, price, brand }) {
   const classes = useStyles();
+  const router = useRouter();
 
   return (
     <Card sx={{ maxWidth: 345, margin: '0 10px' }}>
@@ -41,8 +44,12 @@ export default function ImgMediaCard({ img, title, description, price, brand }) 
         </Typography>}
       </CardContent>
       <CardActions>
-        {/* <Button size="small">Share</Button> */}
-        <Button className={classes.root} size="small">Learn More</Button>
+        <Link href={`${router.asPath}/${id}`}>
+          <a >
+            <Button className={classes.root} size="small">Learn More</Button>
+          </a>
+        </Link>
+
       </CardActions>
     </Card>
   );
